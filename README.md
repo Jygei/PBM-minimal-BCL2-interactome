@@ -1,4 +1,4 @@
-README for general usage of the codes
+[![DOI](https://zenodo.org/badge/973343500.svg)](https://doi.org/10.5281/zenodo.15288515)
 
 # README for using the FLAME codes (see material and methods section):
 We developed different particle-based models (whole-cell PBM and single-mito PBM) that can be used with FLAME v1.5, but the following files need to be changed:
