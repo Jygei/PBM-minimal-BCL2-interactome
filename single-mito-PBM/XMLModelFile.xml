@@ -1,0 +1,411 @@
+<gpu:xmodel xmlns:gpu="http://www.dcs.shef.ac.uk/~paul/XMMLGPU"
+    xmlns = "http://www.dcs.shef.ac.uk/~paul/XMML">
+    <name>Signalling</name>
+    
+    <!--****************************************************************************************************-->
+    <!--******************************************* Environment ********************************************-->
+    <!--****************************************************************************************************-->
+    
+    <gpu:environment>
+        <gpu:functionFiles><file>functions.c</file></gpu:functionFiles>
+    </gpu:environment>
+    
+<xagents>
+
+        <!--****************************************************************************************************-->
+        <!--*********************************** X-machine Agent - Mitochondria *********************************-->
+        <!--****************************************************************************************************-->	
+	<gpu:xagent>
+		<name>Mito</name>
+		<memory>
+                <gpu:variable><type>int</type><name>id</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x1</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y1</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z1</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x2</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y2</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z2</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x3</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y3</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z3</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x4</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y4</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z4</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x5</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y5</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z5</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x6</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y6</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z6</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x7</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y7</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z7</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x8</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y8</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z8</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mitocentrex</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mitocentrey</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mitocentrez</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mitolength</name></gpu:variable>
+                <gpu:variable><type>double</type><name>mitoheight</name></gpu:variable>
+                <gpu:variable><type>double</type><name>mitowidth</name></gpu:variable>
+                <gpu:variable><type>double</type><name>radius</name></gpu:variable>
+				<gpu:variable><type>double</type><name>radius2</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mito_collision_counter</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mito_energetics</name></gpu:variable>
+				<gpu:variable><type>int</type><name>current_mitosize</name></gpu:variable>													  
+            </memory>
+
+		<functions>    
+		
+			<gpu:function>
+				<name>Mito_Output</name>
+				<currentState>Mitostate0</currentState>
+				<nextState>Mitostate1</nextState>
+				<outputs>
+					<gpu:output>
+						<messageName>Mito_Location</messageName>
+						<gpu:type>single_message</gpu:type>
+					</gpu:output>
+				</outputs>
+                <gpu:reallocate>false</gpu:reallocate>
+                <gpu:RNG>true</gpu:RNG>
+			</gpu:function> 
+			
+			<gpu:function>
+                <name>Mito_CC</name>
+                <currentState>Mitostate1</currentState>
+                <nextState>Mitostate0</nextState>
+                <gpu:reallocate>false</gpu:reallocate>
+                <gpu:RNG>true</gpu:RNG>
+            </gpu:function>
+
+		</functions>
+		<states>
+			<gpu:state>
+				<name>Mitostate0</name>
+			</gpu:state>
+			<gpu:state>
+				<name>Mitostate1</name>
+			</gpu:state>
+			<initialState>Mitostate0</initialState>
+		</states>      
+		<gpu:type>continuous</gpu:type>
+		<gpu:bufferSize>1024</gpu:bufferSize>
+	</gpu:xagent>
+
+        
+    <!--****************************************************************************************************-->
+    <!--************************************** X-machine Agent - Ligand ************************************-->
+    <!--****************************************************************************************************-->
+    <!--*************** no ligands in the model of protein reactions on single mitochondria ****************-->    
+        
+	
+	
+	<!--****************************************************************************************************-->
+    <!--************************************* X-machine Agent - Receptor ***********************************-->
+    <!--****************************************************************************************************-->
+        
+    <gpu:xagent>
+        <name>Receptor</name>
+        <memory>
+            <gpu:variable><type>int</type><name>id</name></gpu:variable>
+            <gpu:variable><type>int</type><name>state</name></gpu:variable>
+			<gpu:variable><type>int</type><name>Pending</name></gpu:variable>
+            <gpu:variable><type>int</type><name>active</name></gpu:variable>
+            <gpu:variable><type>double</type><name>x</name></gpu:variable>
+            <gpu:variable><type>double</type><name>y</name></gpu:variable>
+            <gpu:variable><type>double</type><name>z</name></gpu:variable>
+            <gpu:variable><type>double</type><name>Dc</name></gpu:variable>
+			<gpu:variable><type>double</type><name>collision_counter_ligand</name></gpu:variable>
+			<gpu:variable><type>int</type><name>check_collision</name></gpu:variable>
+			<gpu:variable><type>int</type><name>foundedge</name></gpu:variable>
+			<gpu:variable><type>int</type><name>mitoid</name></gpu:variable>
+			<gpu:variable><type>int</type><name>mitosize</name></gpu:variable>		
+        </memory>
+    
+        <!--***************************************************-->
+        <!--****************** Functions **********************-->
+        <!--***************************************************-->
+		<functions>
+            
+            <gpu:function>
+                <name>Receptor_Output</name>
+                <currentState>Rstate0</currentState>
+                <nextState>Rstate1</nextState>
+				<inputs>
+					<gpu:input>
+						<messageName>Mito_Location</messageName>
+					</gpu:input>
+				</inputs>	
+				<outputs>
+					<gpu:output>
+						<messageName>Receptor_Location</messageName>
+                        <gpu:type>optional_message</gpu:type>
+					</gpu:output>
+				</outputs>
+                <gpu:reallocate>true</gpu:reallocate>
+                <gpu:RNG>true</gpu:RNG>
+            </gpu:function>
+            
+            <gpu:function>
+                <name>Receptor_Dissociate_Receptor</name>
+                <currentState>Rstate1</currentState>
+                <nextState>Rstate2</nextState>
+                <inputs>
+                    <gpu:input>
+                        <messageName>Mito_Location</messageName>
+                    </gpu:input>
+                </inputs>
+                <xagentOutputs>
+                    <gpu:xagentOutput>
+                        <xagentName>Receptor</xagentName>
+                        <state>Rstate0</state>
+                    </gpu:xagentOutput>
+                </xagentOutputs>
+                <gpu:reallocate>true</gpu:reallocate>
+                <gpu:RNG>true</gpu:RNG>
+            </gpu:function>
+            
+            <gpu:function>
+                <name>Receptor_Bind_Receptor</name>
+                <currentState>Rstate2</currentState>
+                <nextState>Rstate3</nextState>
+                <inputs>
+                    <gpu:input>
+                        <messageName>Receptor_Location</messageName>
+                    </gpu:input>
+                </inputs>
+                <outputs>
+                    <gpu:output>
+                        <messageName>Receptor_Bound</messageName>
+                        <gpu:type>optional_message</gpu:type>
+                    </gpu:output>
+                </outputs>
+                <xagentOutputs>
+                    <gpu:xagentOutput>
+                        <xagentName>Receptor</xagentName>
+                        <state>Rstate0</state>
+                    </gpu:xagentOutput>
+                </xagentOutputs>
+                <gpu:reallocate>true</gpu:reallocate>
+                <gpu:RNG>true</gpu:RNG>
+            </gpu:function>
+            
+            <gpu:function>
+                <name>Receptor_Check_Bound</name>
+                <currentState>Rstate3</currentState>
+                <nextState>Rstate4</nextState>
+                <inputs>
+                    <gpu:input>
+                        <messageName>Receptor_Bound</messageName>
+                    </gpu:input>
+                </inputs>
+                <outputs>
+                    <gpu:output>
+                        <messageName>MReceptor_Confirm</messageName>
+                        <gpu:type>optional_message</gpu:type>
+                    </gpu:output>
+                </outputs>
+                <xagentOutputs>
+                    <gpu:xagentOutput>
+                        <xagentName>Receptor</xagentName>
+                        <state>Rstate0</state>
+                    </gpu:xagentOutput>
+                </xagentOutputs>
+                <gpu:reallocate>true</gpu:reallocate>
+                <gpu:RNG>true</gpu:RNG>
+            </gpu:function>
+            
+            <gpu:function>
+                <name>Receptor_Confirm_Receptor</name>
+                <currentState>Rstate4</currentState>
+                <nextState>Rstate0</nextState>
+                <inputs>
+                    <gpu:input>
+                        <messageName>MReceptor_Confirm</messageName>
+                    </gpu:input>
+                </inputs>
+                <xagentOutputs>
+                    <gpu:xagentOutput>
+                        <xagentName>Receptor</xagentName>
+                        <state>Rstate0</state>
+                    </gpu:xagentOutput>
+                </xagentOutputs>
+                <gpu:reallocate>true</gpu:reallocate>
+                <gpu:RNG>true</gpu:RNG>
+            </gpu:function>
+			
+		</functions>
+		
+		<states>
+            <gpu:state>
+                <name>Rstate0</name>
+            </gpu:state>
+            <gpu:state>
+                <name>Rstate1</name>
+            </gpu:state>
+            <gpu:state>
+                <name>Rstate2</name>
+            </gpu:state>
+            <gpu:state>
+                <name>Rstate3</name>
+            </gpu:state>
+            <gpu:state>
+                <name>Rstate4</name>
+            </gpu:state>
+            <initialState>Rstate0</initialState>
+        </states>
+        <gpu:type>continuous</gpu:type>
+        <gpu:bufferSize>16777216</gpu:bufferSize>
+		
+	</gpu:xagent>
+
+    
+</xagents>
+
+<!--****************************************************************************************************-->
+<!--********************************************** Messages ********************************************-->
+<!--****************************************************************************************************-->
+
+<messages>
+
+    <gpu:message>
+		<name>Mito_Location</name>
+		<variables>
+		<gpu:variable><type>int</type><name>id</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x1</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y1</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z1</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x2</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y2</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z2</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x3</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y3</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z3</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x4</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y4</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z4</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x5</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y5</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z5</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x6</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y6</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z6</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x7</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y7</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z7</name></gpu:variable>
+                <gpu:variable><type>double</type><name>x8</name></gpu:variable>
+                <gpu:variable><type>double</type><name>y8</name></gpu:variable>
+                <gpu:variable><type>double</type><name>z8</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mitocentrex</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mitocentrey</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mitocentrez</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mitolength</name></gpu:variable>
+                <gpu:variable><type>double</type><name>mitoheight</name></gpu:variable>
+                <gpu:variable><type>double</type><name>mitowidth</name></gpu:variable>
+				<gpu:variable><type>double</type><name>radius</name></gpu:variable>
+				<gpu:variable><type>double</type><name>radius2</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mito_collision_counter</name></gpu:variable>
+				<gpu:variable><type>double</type><name>mito_energetics</name></gpu:variable>
+				<gpu:variable><type>int</type><name>current_mitosize</name></gpu:variable>														  
+		</variables>
+		<gpu:partitioningNone></gpu:partitioningNone>
+		<gpu:bufferSize>1024</gpu:bufferSize>
+	</gpu:message>
+    
+    <gpu:message>
+        <name>Receptor_Location</name>
+        <variables>
+        <gpu:variable><type>int</type><name>id</name></gpu:variable>
+        <gpu:variable><type>int</type><name>state</name></gpu:variable>
+        <gpu:variable><type>double</type><name>x</name></gpu:variable>
+        <gpu:variable><type>double</type><name>y</name></gpu:variable>
+        <gpu:variable><type>double</type><name>z</name></gpu:variable>
+		<gpu:variable><type>double</type><name>collision_counter_ligand</name></gpu:variable>
+		<gpu:variable><type>int</type><name>check_collision</name></gpu:variable>
+		<gpu:variable><type>int</type><name>foundedge</name></gpu:variable>
+		<gpu:variable><type>int</type><name>mitoid</name></gpu:variable>
+		<gpu:variable><type>int</type><name>mitosize</name></gpu:variable>	
+        </variables>
+		<gpu:partitioningSpatial>
+            <gpu:radius>20</gpu:radius>
+            <gpu:xmin>0</gpu:xmin>
+            <gpu:xmax>10800</gpu:xmax>
+            <gpu:ymin>0</gpu:ymin>
+            <gpu:ymax>4880</gpu:ymax>
+            <gpu:zmin>0</gpu:zmin>
+            <gpu:zmax>93800</gpu:zmax>
+        </gpu:partitioningSpatial>
+        <gpu:bufferSize>16777216</gpu:bufferSize>
+    </gpu:message>
+    
+    <gpu:message>
+        <name>Receptor_Bound</name>
+        <variables>
+        <gpu:variable><type>int</type><name>id</name></gpu:variable>
+        <gpu:variable><type>int</type><name>idfrom</name></gpu:variable>
+        <gpu:variable><type>double</type><name>distance</name></gpu:variable>
+        <gpu:variable><type>int</type><name>Reaction</name></gpu:variable>
+        </variables>
+        <gpu:partitioningNone></gpu:partitioningNone>
+        <gpu:bufferSize>16777216</gpu:bufferSize>
+    </gpu:message>
+    
+    <gpu:message>
+        <name>MReceptor_Confirm</name>
+        <variables>
+        <gpu:variable><type>int</type><name>id</name></gpu:variable>
+        <gpu:variable><type>int</type><name>Reaction</name></gpu:variable>
+        </variables>
+        <gpu:partitioningNone></gpu:partitioningNone>
+        <gpu:bufferSize>16777216</gpu:bufferSize>
+    </gpu:message>
+	
+	
+	
+</messages>
+
+<!--****************************************************************************************************-->
+<!--*********************************************** Layers *********************************************-->
+<!--****************************************************************************************************-->
+
+<layers>
+	<layer>
+		<gpu:layerFunction>
+			<name>Mito_Output</name>
+		</gpu:layerFunction>
+	</layer>
+	<layer>
+		<gpu:layerFunction>
+            <name>Mito_CC</name>
+        </gpu:layerFunction>
+	</layer>
+	<layer>
+        <gpu:layerFunction>
+            <name>Receptor_Output</name>
+        </gpu:layerFunction>
+    </layer>
+    <layer>
+    <gpu:layerFunction>
+        <name>Receptor_Dissociate_Receptor</name>
+    </gpu:layerFunction>
+    </layer>
+    <layer>
+        <gpu:layerFunction>
+            <name>Receptor_Bind_Receptor</name>
+        </gpu:layerFunction>
+    </layer>
+    <layer>
+        <gpu:layerFunction>
+            <name>Receptor_Check_Bound</name>
+        </gpu:layerFunction>
+    </layer>
+    <layer>
+        <gpu:layerFunction>
+            <name>Receptor_Confirm_Receptor</name>
+        </gpu:layerFunction>
+    </layer>
+</layers>
+
+</gpu:xmodel>
