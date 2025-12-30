@@ -23,6 +23,22 @@ All visualizations of the particle-based model were created in Python 3.11. The 
 # README Python distribution analysis "heatmaps" (see materials and methods section):
 All visualizations of the particle-based model were created in Python 3.11. The built-in XML parser was used to parse the XML files of the particle-based model to generate heatmaps showing the particle levels in terms of intensities.
 
+### Citation
+
+If you use this repository, please cite:  https://doi.org/10.1038/s41419-025-08258-9
+
+**Software**  
+Geiger, J. et al. (2025). *Stochasticity contributes to explaining minority and majority MOMP during apoptosis*. Zenodo.  
+DOI: https://doi.org/10.5281/zenodo.15288515
+
+**Publication**  
+Geiger, J. et al. (2025). *Stochasticity contributes to explaining minority and majority MOMP during apoptosis*. Cell, Death and Disease.  
+DOI:  https://doi.org/10.1038/s41419-025-08258-9
+
 ---
-Jenny Geiger<br>
-Institute of Cell Biology and Immunology (IZI) at the University of Stuttgart, Germany
+
+Jenny Geiger  
+Institute of Cell Biology and Immunology (IZI)  
+University of Stuttgart, Germany
+
+
