@@ -1,5 +1,32 @@
 [![DOI](https://zenodo.org/badge/973343500.svg)](https://doi.org/10.5281/zenodo.15288515)
 
+# FLAME codes and analysis for *Stochasticity contributes to explaining minority and majority MOMP during apoptosis*
+
+This repository contains the code and analysis files used to generate the results presented in the following publication:
+
+> **Geiger, J., Klötzer, F., Pollak, N., Fullstone, G., Rehm, M. et al. (2025). _Stochasticity contributes to explaining minority and majority MOMP during apoptosis_. Cell Death & Disease, 16:893.**  
+> DOI: https://doi.org/10.1038/s41419-025-08258-9
+
+If you use this code in your work, please cite **both**:
+1. the publication above, and  
+2. this software (Zenodo DOI badge at the top).
+
+---
+
+## Citation
+
+### Software
+Geiger, J. (2025). *FLAME codes and analysis for Stochasticity contributes to explaining minority and majority MOMP during apoptosis*. Zenodo.  
+DOI: https://doi.org/10.5281/zenodo.15288515
+
+### Related publication
+Geiger, J., Klötzer, F., Pollak, N., Fullstone, G., Rehm, M. et al. (2025).  
+*Stochasticity contributes to explaining minority and majority MOMP during apoptosis*.  
+Cell Death & Disease, 16:893.  
+DOI: https://doi.org/10.1038/s41419-025-08258-9
+
+---
+
 # README for using the FLAME codes (see material and methods section):
 We developed different particle-based models (whole-cell PBM and single-mito PBM) that can be used with FLAME v1.5, but the following files need to be changed:
 - 0Creator.c
@@ -23,22 +50,11 @@ All visualizations of the particle-based model were created in Python 3.11. The 
 # README Python distribution analysis "heatmaps" (see materials and methods section):
 All visualizations of the particle-based model were created in Python 3.11. The built-in XML parser was used to parse the XML files of the particle-based model to generate heatmaps showing the particle levels in terms of intensities.
 
-### Citation
-
-If you use this repository, please cite:  https://doi.org/10.1038/s41419-025-08258-9
-
-**Software**  
-Geiger, J. et al. (2025). *Stochasticity contributes to explaining minority and majority MOMP during apoptosis*. Zenodo.  
-DOI: https://doi.org/10.5281/zenodo.15288515
-
-**Publication**  
-Geiger, J. et al. (2025). *Stochasticity contributes to explaining minority and majority MOMP during apoptosis*. Cell, Death and Disease.  
-DOI:  https://doi.org/10.1038/s41419-025-08258-9
-
 ---
 
 Jenny Geiger  
 Institute of Cell Biology and Immunology (IZI)  
 University of Stuttgart, Germany
+
 
 
