@@ -1,0 +1,32 @@
+cff-version: 1.0.0
+title: "FLAME codes and analysis for the publication: Stochasticity contributes to explaining minority and majority MOMP during apoptosis"
+message: "If you use this software, please cite both the software and the related publication."
+type: software
+
+authors:
+  - family-names: "Geiger"
+    given-names: "Jenny"
+    affiliation: "Institute of Cell Biology and Immunology (IZI), University of Stuttgart, Germany"
+
+version: "1.1.0"
+doi: "10.5281/zenodo.15288515"
+date-released: 2025-04-26
+
+preferred-citation:
+  type: article
+  title: "Stochasticity contributes to explaining minority and majority MOMP during apoptosis"
+  authors:
+    - family-names: "Geiger"
+      given-names: "Jenny"
+    - family-names: "Klötzer"
+      given-names: "Fabian"
+    - family-names: "Pollak"
+      given-names: "Nadine"
+    - family-names: "Fullstone"
+      given-names: "Gavin"
+    - family-names: "Rehm"
+      given-names: "Markus"
+  journal: "Cell Death & Disease"
+  volume: 16
+  year: 2025
+  doi: "10.1038/s41419-025-08258-9"
